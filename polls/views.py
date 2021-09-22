@@ -17,7 +17,7 @@ def index(request):
         'latest_question_list': latest_question_list,
     }
     return HttpResponse(template.render(context, request))
-    y
+    
 # Other way(using shortcuts)
 # def index(request):
 #     latest_question_list = Question.objects.order_by('-pub_date')[:5]
