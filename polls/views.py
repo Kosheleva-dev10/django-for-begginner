@@ -1,9 +1,10 @@
-from django.shortcuts import render
 from django.http import HttpResponse
-from django.template import loader
 from .models import Question
+from .models import Choice
 
 # import django.shortcuts import render
+
+from django.template import loader
 
 
 def index(request):
@@ -28,7 +29,15 @@ def index(request):
     
 
 def detail(request, question_id):
-    return HttpResponse("You're looking at question %s." % question_id)
+    print('======question_id: =======', question_id)
+    template = loader.get_template('polls/detail.html')
+    question = Question.objects.get(pk=question_id)
+    context = {
+        'question': question,
+    }
+    print("template: ", template, "context: ", context )
+    return HttpResponse(template.render(context, request))
+    
 
 def results(request, question_id):
     response = "You're looking at the results of question %s."
